@@ -1,3 +1,5 @@
+language: generic
+
 # Anytime we're making use of Docker, we need superuser level permission
 sudo: required
 
@@ -16,5 +18,18 @@ script:
   # each '-e' allows us to set an environment variable (CI in this case)
   - docker run -e CI=true zhidong32142/docker-react npm run test
 
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-107147372111"
+  # project folder will only be created after first deploy, hence we need to use the app name 
+  # as placeholder when doing initial deployment
+  bucket_path: "docker-react"
+  on:
+    # Only deploy when merging to master
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
 
-language: generic

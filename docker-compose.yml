@@ -1,27 +1,8 @@
-version: '3'
-
+version: "3"
 services:
   web:
-    build: 
-      # specifies where we want all the files and folders 
-      # for this image to be pulled from
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "3000:3000"
-    volumes:
-      - /app/node_modules
-      - .:/app
-
-  tests: 
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - .:/app
-    # We don't want this service to start with npm run start 
-    # We want it to start with npm run test
-    command: ["npm", "run", "test"]
-
-  
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
