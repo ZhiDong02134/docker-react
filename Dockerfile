@@ -13,6 +13,10 @@ RUN npm run build
 
 # Start of new block, last one is done
 FROM nginx
+# Mainly for developers
+# elasticbeanstalk will parse this file, see this instruction
+# and map to the port specified automatically
+EXPOSE 80
 # '--from=builder' - specifies that we want to copy 
 # something from the builder phase
 COPY --from=builder /app/build /usr/share/nginx/html
