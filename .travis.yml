@@ -1,0 +1,20 @@
+# Anytime we're making use of Docker, we need superuser level permission
+sudo: required
+
+services:
+  # informs Travis that we need a copy of Docker ready to go
+  - docker
+
+# series of commands that's going to be executed before our tests are ran
+before_install:
+  - docker build -t zhidong32142/docker-react -f Dockerfile.dev .
+
+
+script:
+  # CI=true forces Jest to run in CI-mode, which will only run the test once
+  # rather than launching the watcher
+  # each '-e' allows us to set an environment variable (CI in this case)
+  - docker run -e CI=true zhidong32142/docker-react npm run test
+
+
+language: generic
