@@ -28,7 +28,7 @@ deploy:
   # as placeholder when doing initial deployment
   bucket_path: "docker-react"
   on:
-    # Only deploy when merging to master
+    # Only deploy when merging to main
     branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: "$AWS_SECRET_KEY"
